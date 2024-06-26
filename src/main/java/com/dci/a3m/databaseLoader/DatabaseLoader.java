@@ -37,9 +37,9 @@ public class DatabaseLoader implements CommandLineRunner {
 
 
 //            BETTER KEEP IT COMMENTED BY PUSHING TO GITHUB
-            initAdmin();
-            initMembers();
-            initFriendships();
+//            initAdmin();
+//            initMembers();
+//            initFriendships();
 
 
         } catch (Exception e) {

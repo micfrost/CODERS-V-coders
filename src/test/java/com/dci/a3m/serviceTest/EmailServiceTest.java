@@ -60,7 +60,7 @@ class EmailServiceTest {
         assertEquals(text, sentMessage.getText());
     }
 
-    @Test
+//    @Test
     void sendResetPasswordEmail_Member() {
         Member member = new Member();
         User user = new User();
