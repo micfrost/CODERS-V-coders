@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+<style>
+    body {
+        background-color: #b28abb;
+        background-image: linear-gradient(
+                180deg,
+                #527fc0 0%,
+                #8176b9 90%,
+                hsl(289, 26%, 64%) 100%
+        );
+        font-family: Montserrat, sans-serif;
+        color: #ffffff;
+        min-height: 100vh;
+    }
+
+    .btn-primary {
+        background-color: #527fc0;
+        border-color: #527fc0;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #8176b9;
+        border-color: #8176b9;
+        color: #fff;
+    }
+
+</style>
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+
+<div class="container">
+
+
+    <form th:action="@{${member.id} == null ? '/mvc/member-form/create' : '/mvc/member-form/update'}"
+          th:object="${member}"
+          method="post">
+
+        <div class="row justify-content-center">
+            <div class=" col-xl-4 col-lg-6 col-md-12">
+                <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+                <div class="card mb-3">
+                    <div class="card-header text-center">
+                        <h3>User</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- form for create or update depending on if there is an id or not -->
+
+                        <!-- hidden for update -->
+                        <input type="hidden" th:field="*{id}">
+
+                        <!-- username -->
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" th:field="*{user.username}"
+                                   class="form-control" required>
+                        </div>
+
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" th:field="*{user.email}" class="form-control"
+                                   required>
+                        </div>
+
+                        <!-- password -->
+                        <div class="form-group" th:if="${member.id == null}">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" th:field="*{user.password}"
+                                   class="form-control"
+                                   required>
+                            <div class="text-danger" th:if="${#fields.hasErrors('user.password')}" th:utext="${#fields.errors('user.password')}"></div>
+
+                        </div>
+                        <!-- birth date -->
+                        <div class="form-group" th:if="${member.id == null}">
+                            <label for="birthDate">Birth Date:</label>
+                            <input type="date" id="birthDate" name="birthDate" th:field="*{birthDate}"
+                                   class="form-control"
+                                   required>
+                            <div class="text-danger" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+                        </div>
+
+                        <input type="hidden" th:field="*{role}"/>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Additional fields for updates only -->
+            <div th:if="${member.id} != null" class=" col-xl-4 col-lg-6 col-md-12">
+                <div class="card mb-3">
+                    <div class="card-header text-center">
+                        <h3>Profile</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col">
+
+                                <div class="form-group">
+                                    <label for="firstName">First Name:</label>
+                                    <input type="text" id="firstName" name="firstName" th:field="*{firstName}"
+                                           class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- last name -->
+                                <div class="form-group">
+                                    <label for="lastName">Last Name:</label>
+                                    <input type="text" id="lastName" name="lastName" th:field="*{lastName}"
+                                           class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- profile picture -->
+                        <div class="form-group">
+                            <label for="profilePicture">Profile Picture (Url): </label>
+                            <input type="text" id="profilePicture" name="profilePicture"
+                                   th:field="*{profilePicture}"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${member.id} != null" class=" col-xl-4 col-lg-6 col-md-12">
+                <div class="card mb-3">
+                    <div class="card-header text-center">
+                        <h3>Address</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <!-- city -->
+                                <div class="form-group">
+                                    <label for="city">City:</label>
+                                    <input type="text" id="city" name="city" th:field="*{city}" class="form-control"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <!-- country -->
+                                <div class="form-group">
+                                    <label for="country">Country:</label>
+                                    <input type="text" id="country" name="country" th:field="*{country}"
+                                           class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <!-- postal code -->
+                                <div class="form-group">
+                                    <label for="postalCode">Postal Code:</label>
+                                    <input type="text" id="postalCode" name="postalCode" th:field="*{postalCode}"
+                                           class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- phone -->
+                                <div class="form-group">
+                                    <label for="phone">Phone:</label>
+                                    <input type="text" id="phone" name="phone" th:field="*{phone}"
+                                           class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit button (text changes based on create/update) -->
+        <div class="row justify-content-center">
+            <div class=" col-xl-4 col-lg-6 col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body d-flex justify-content-center">
+                        <div>
+                            <!-- Alert Message -->
+                            <div>
+                                <p>This is a demo app. Please do not provide real email and phone number.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                    th:text="*{id} == null ? 'Create Account' : 'Update Account'"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</body>
+</html>
+

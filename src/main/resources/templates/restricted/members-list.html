@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+<div class="container">
+
+
+    <h3>All Members </h3>
+    <hr>
+    <div class="row">
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+        <div class="col">
+            <form th:action="@{/admin-dashboard/members-delete-all}" method="post"
+                  onsubmit="return confirm('Are you sure you want to delete ALL MEMBERS?')">
+                <button type="submit" class="btn btn-danger btn-sm">Delete all members</button>
+            </form>
+        </div>
+        <div class="col">
+            <form th:action="@{/admin-dashboard/members-create-init}" method="post">
+                <button type="submit" class="btn btn-success btn-sm">Create initial members</button>
+            </form>
+        </div>
+    </div>
+
+    <br>
+    <form th:action="@{/admin-dashboard/searchUsername}" method="POST">
+        <label>Username: </label><input type="text" name="memberUsername">
+        <button class="btn btn-primary btn-sm">Search</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Enabled</th>
+            <th>Created At</th>
+            <th>Number of Posts</th>
+            <th>Block</th>
+            <th>Unblock</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.user.username}"></td>
+            <td th:text="${member.user.email}"></td>
+            <td th:text="${member.role}"></td>
+            <td th:text="${member.user.enabled}"></td>
+            <td th:text="${#temporals.format(member.user.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></td>
+            <td th:text="${member.posts.size()}"></td>
+            <td>
+                <form th:action="@{/admin-dashboard/member-block}" method="post" style="display:inline;">
+                    <input type="hidden" name="memberId" th:value="${member.id}"/>
+                    <input type="hidden" name="enabled" value="false"/>
+                    <button type="submit" class="btn btn-warning btn-sm">Block</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin-dashboard/member-unblock}" method="post" style="display:inline;">
+                    <input type="hidden" name="memberId" th:value="${member.id}"/>
+                    <input type="hidden" name="enabled" value="true"/>
+                    <button type="submit" class="btn btn-success btn-sm">Unblock</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin-dashboard/member-delete}" method="post" style="display:inline;"
+                      onsubmit="return confirm('Are you sure you want to delete this member?')">
+                    <input type="hidden" name="memberId" th:value="${member.id}"/>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+
+</div>
+</body>
+</html>

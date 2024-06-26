@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+<div class="container">
+
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+    <h3>Post Form</h3>
+    <hr>
+
+    <!-- form for create or update depending on if there is an id or not -->
+    <form th:action="@{${post.id} == null ? '/mvc/post-form/create' : '/mvc/post-form/update'}"
+          th:object="${post}"
+          method="post">
+
+        <!-- hidden for update -->
+        <input type="hidden" th:field="*{id}">
+<!--        <input type="hidden" th:field="*{member.id}">-->
+<!--        <input type="hidden" th:field="*{member.user.username}">-->
+
+
+        <!-- content -->
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" th:field="*{content}" class="form-control" required></textarea>
+        </div>
+
+        <!-- mediaUrl -->
+        <div class="form-group">
+            <label for="mediaUrl">Media URL:</label>
+            <input type="text" id="mediaUrl" name="mediaUrl" th:field="*{mediaUrl}" class="form-control">
+        </div>
+
+<!--        &lt;!&ndash; background &ndash;&gt;-->
+<!--        <div class="form-group">-->
+<!--            <label for="background">Background:</label>-->
+<!--            <input type="file" id="background" name="background" th:field="*{background}" class="form-control">-->
+<!--        </div>-->
+
+
+
+        <!-- Submit button (text changes based on create/update) -->
+        <button type="submit" class="btn btn-primary"
+                th:text="*{id} == null ? 'Create Post' : 'Update Post'"></button>
+
+    </form>
+
+
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</div>
+</body>
+</html>

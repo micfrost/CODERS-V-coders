@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<style>
+    body {
+        background-color: #b28abb;
+        background-image: linear-gradient(
+                180deg,
+                #527fc0 0%,
+                #8176b9 90%,
+                hsl(289, 26%, 64%) 100%
+        );
+        font-family: Montserrat, sans-serif;
+        color: #ffffff;
+        min-height: 100vh;
+    }
+
+    .btn-primary {
+        background-color: #527fc0;
+        border-color: #527fc0;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #8176b9;
+        border-color: #8176b9;
+        color: #fff;
+    }
+
+</style>
+
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+
+
+<div class="container">
+
+
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h3>Login Page</h3>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/authenticate}" method="post">
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            Invalid username and password.
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-info">
+                            You have been logged out.
+                        </div>
+                        <div th:if="${param.blocked}" class="alert alert-danger">
+                            Your account is blocked.
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" class="form-control" required/>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required/>
+                        </div>
+                        <div class="form-group mt-4 text-center">
+                            <input type="submit" value="Log in" class="btn btn-primary"/>
+                        </div>
+                    </form>
+                    <a th:href="@{/forgot-password}">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    If you dont have an account create one-->
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-6 col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <p>Don't have an account?</p>
+                    <a th:href="@{/mvc/member-form}" class="btn btn-primary">Register as a member</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</div>
+</body>
+</html>

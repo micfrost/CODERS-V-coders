@@ -1,0 +1,189 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="head :: common-head"></th:block>
+<body>
+
+<div th:fragment="common-navbar" th:align="center">
+
+    <!--if a member is logged in show-->
+    <div th:if="${#authorization.expression('isAuthenticated() and hasRole(''ROLE_MEMBER'')')}">
+        <th:block th:replace="~{fragments/navbar :: member-navbar}"></th:block>
+    </div>
+
+
+    <!--if an admin is logged in show-->
+    <div th:if="${#authorization.expression('isAuthenticated() and hasRole(''ROLE_ADMIN'')')}">
+
+        <th:block th:replace="~{fragments/navbar :: admin-navbar}"></th:block>
+    </div>
+</div>
+
+
+<div th:fragment="member-navbar" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Static label -->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/mvc/posts-of-friends}">
+                            CODER:
+                        </a>
+                    </li>
+
+                    <!-- Display username with icon -->
+                    <li class="nav-item">
+                        <a th:href="@{/logged-coder-or-admin}" class="nav-link"
+                           th:text="${#authentication.principal.username}"></a>
+                    </li>
+
+
+
+                    <!-- Friends link with icon -->
+                    <li class="nav-item">
+                        <a th:href="@{/mvc/friends}" class="nav-link">
+                            <i class="bi bi-people-fill"></i> Friends
+                        </a>
+                    </li>
+
+                    <!-- Posts link with icon -->
+                    <li class="nav-item">
+                        <a th:href="@{/mvc/posts-your}" class="nav-link">
+                            <i class="bi bi-pen-fill"></i> Posts
+                        </a>
+                    </li>
+
+                    <!-- Log out link with icon -->
+                    <li class="nav-item">
+                        <a th:href="@{/logout}" class="nav-link">
+                            <i class="bi bi-box-arrow-in-right"></i> Log out
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Go Back button on the right -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="javascript:history.back()" class="btn btn-primary btn-sm">Go Back</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+</div>
+
+<div th:fragment="admin-navbar" class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Static label -->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login-success}">
+                            ADMIN:
+                        </a>
+                    </li>
+
+                    <!-- Display username with icon -->
+                    <li class="nav-item">
+                        <!--                        <i class="bi bi-person-circle"></i>-->
+                        <a th:href="@{/login-success}" class="nav-link"
+                           th:text="${#authentication.principal.username}"></a>
+                    </li>
+
+                    <!-- Friends link with icon -->
+                    <li class="nav-item">
+                        <a th:href="@{/admin-dashboard/members-list}" class="nav-link">
+                            <i class="bi bi-people-fill"></i> Members
+                        </a>
+                    </li>
+
+                    <!-- Posts link with icon -->
+                    <li class="nav-item">
+                        <a th:href="@{/admin-dashboard/posts-list}" class="nav-link">
+                            <i class="bi bi-pen-fill"></i> Posts
+                        </a>
+                    </li>
+                    <!-- Comments link with icon -->
+                    <li class="nav-item">
+                        <a th:href="@{/admin-dashboard/comments-list}" class="nav-link">
+                            <i class="bi bi-pen-fill"></i> Comments
+                        </a>
+                    </li>
+
+                    <!-- Log out link with icon -->
+                    <li class="nav-item">
+                        <a th:href="@{/logout}" class="nav-link">
+                            <i class="bi bi-box-arrow-in-right"></i> Log out
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Go Back button on the right -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="javascript:history.back()" class="btn btn-primary btn-sm">Go Back</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+</div>
+
+
+<div th:fragment="friends-navbar" class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav class="nav">
+                <a th:href="@{/mvc/friends}" class="btn btn-outline-primary mx-2 my-1">
+                    <i class="bi bi-heart-fill nav-link-icon"></i> Your Friends
+                </a>
+
+                <a th:href="@{/mvc/members}" class="btn btn-outline-primary mx-2 my-1">
+                    <i class="bi bi-people-fill nav-link-icon"></i> All Members
+                </a>
+                <a th:href="@{/mvc/friendship-invitations}" class="btn btn-outline-primary mx-2 my-1">
+                    <i class="bi bi-envelope-fill nav-link-icon"></i> See Invitations
+                </a>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="posts-navbar" class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav class="nav">
+                <a th:href="@{/mvc/posts-your}" class="btn btn-outline-primary mx-2 my-1">
+                    <i class="bi bi-person-fill nav-link-icon"></i> Your Posts
+                </a>
+
+
+                <a th:href="@{/mvc/posts-of-friends}" class="btn btn-outline-primary mx-2 my-1">
+                    <i class="bi bi-people-fill nav-link-icon"></i> Your Friends Posts
+                </a>
+
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

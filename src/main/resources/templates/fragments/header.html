@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="head :: common-head"></th:block>
+<body>
+
+
+<div th:fragment="common-header" th:align="center"><br>
+
+    <div class="container header">
+
+
+        <a th:href="@{/mvc/posts-of-friends}" class="navbar-brand">
+            <!--            two columns-->
+            <div class="row">
+                <!--                <div class="col">-->
+                <!--                    <img src="/img/people_2302276.png"-->
+                <!--                         alt="Coders Logo" width="100" height="100" >-->
+                <!--                </div>-->
+                <div class="col">
+                    <h1>[ CODERS ]</h1>
+                    <h4>SOCIAL MEDIA APP</h4>
+                </div>
+            </div>
+        </a>
+        <br>
+    </div>
+</div>
+
+
+</body>
+</html>
+

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+<div class="container">
+
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+    <h3>Post Info</h3>
+    <hr>
+
+    <!-- Post card -->
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-body d-flex flex-column">
+                    <!--image-->
+                    <img th:src="${post.mediaUrl}" class="card-img-top" alt="media"
+                         style="width: 100%; height: 500px; object-fit: cover;">
+                    <!--content-->
+                    <h5 class="card-title mt-3" th:text="${post.content}"></h5>
+                    <!--Author-->
+                    <p>
+                        <span class="card-text">Post from <span th:text="${post.member.user.username}"></span></span>,
+                        <span class="card-text">created on <span th:text="${post.getCreatedAtFormattedOnlyDate}"></span></span>.
+                    </p>
+                </div>
+
+                <!-- footer -->
+                <div class="card-footer bg-grey">
+                    <!--            two columns in one row-->
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <span class="card-text">Likes: <span th:text="${post.likes.size()}"></span>.</span>
+                            </div>
+                            <div th:if="${likedYourPosts[post.id]}">
+                                <form th:action="@{/mvc/unlike-post-info}" method="post" class="d-inline">
+                                    <input type="hidden" name="postId" th:value="${post.id}"/>
+                                    <button type="submit" class="btn btn-outline-primary btn-sm mt-1 mb-3">
+                                        <i class="bi bi-heart-fill"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div th:unless="${likedYourPosts[post.id]}">
+                                <form th:action="@{/mvc/like-post-info}" method="post" class="d-inline">
+                                    <input type="hidden" name="postId" th:value="${post.id}"/>
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm mt-1 mb-3">
+                                        <i class="bi bi-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div th:if="${#authentication.principal != null and #authentication.principal.username == post.member.user.username}">
+                                <span class="card-text">Post</span>
+
+                            </div>
+                            <!--
+                                                        !-- Show update and delete buttons if the authenticated user is the author of the post -->
+                            <div th:if="${#authentication.principal != null and #authentication.principal.username == post.member.user.username}">
+                                <a th:href="@{/mvc/post-form-update(postId=${post.id})}"
+                                   class="btn btn-primary btn-sm mt-1 mb-3">Update</a>
+                                <a th:href="@{/mvc/post-delete(postId=${post.id})}"
+                                   class="btn btn-danger btn-sm mt-1 mb-3"
+                                   onclick="return confirm('Are you sure you want to DELETE this POST')">Delete</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Comments -->
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title mt-3">Comments</h3>
+                    <div>
+                        <span class="card-text">There are already <span th:text="${post.comments.size()}"></span> comments.</span>
+                        <p>Create a new one.</p>
+                    </div>
+                    <a th:href="@{/mvc/comment-form(postId=${post.id})}" class="btn btn-primary btn-sm mt-1 mb-3">Add
+                        Comment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div th:each="comment : ${post.comments}" class="col-lg-6 col-sm-12 ">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <!--content-->
+                    <h5 class="card-title mt-3" th:text="${comment.content}"></h5>
+                    <!--Author-->
+                    <p>
+                        <span class="card-text">Comment from <span
+                                th:text="${comment.member.user.username}"></span></span>,
+                        <span class="card-text">on <span
+                                th:text="${comment.getCreatedAtFormattedOnlyDate}"></span></span>.
+                    </p>
+                </div>
+
+                <!-- footer -->
+                <div class="card-footer bg-grey">
+                    <!--            two columns in one row-->
+                    <div class="row">
+
+                        <div class="col">
+                            <div>
+                                    <span class="card-text">Likes: <span
+                                            th:text="${comment.likes.size()}"></span></span>
+                            </div>
+                            <div th:if="${likedComments[comment.id]}">
+                                <form th:action="@{/mvc/unlike-comment}" method="post" class="d-inline">
+                                    <input type="hidden" name="commentId" th:value="${comment.id}"/>
+                                    <button type="submit" class="btn btn-outline-primary btn-sm mt-1 mb-3">
+                                        <i class="bi bi-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div th:unless="${likedComments[comment.id]}">
+                                <form th:action="@{/mvc/like-comment}" method="post" class="d-inline">
+                                    <input type="hidden" name="commentId" th:value="${comment.id}"/>
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm mt-1 mb-3">
+                                        <i class="bi bi-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div th:if="${#authentication.principal != null and #authentication.principal.username == comment.member.user.username}">
+                                <div>
+                                    <span class="card-text">Comment</span>
+                                </div>
+                                <a th:href="@{/mvc/comment-form-update(commentId=${comment.id})}"
+                                   class="btn btn-primary btn-sm mt-1 mb-3">Update</a>
+                                <a th:href="@{/mvc/comment-delete(commentId=${comment.id})}"
+                                   class="btn btn-danger btn-sm mt-1 mb-3"
+                                   onclick="return confirm('Are you sure you want to DELETE this COMMENT')">Delete</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

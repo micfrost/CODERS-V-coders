@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="head :: common-head"></th:block>
+<body>
+
+
+<div th:fragment="common-footer" th:align="center">
+    <br> <br>
+    <span>A3M &copy; </span> <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2024</span>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</div>
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+<th:block th:replace="~{fragments/navbar :: friends-navbar}"></th:block>
+<div class="container">
+
+    <div class="row my-3">
+        <h3>Your Friends</h3>
+    </div>
+    <div class="row">
+        <div th:each="friend : ${friendDetails}" class="col-md-6 col-sm-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center align-items-center">
+                            <a th:href="@{/mvc/members/(memberId=${friend.memberId})}">
+                            <img th:src="${friend.profilePicture}" class="card-img-top rounded-circle mx-auto"
+                                 style="width: 150px; height: 150px;" alt="Friend Photo">
+                            </a>
+                        </div>
+                        <div class="col">
+                            <h5 class="card-text"><span th:text="${friend.firstName}"></span> <span
+                                    th:text="${friend.lastName}"></span></h5>
+                            <p class="card-text">Username: <br><span th:text="${friend.username}"></span></p>
+                            <a th:href="@{/mvc/members/(memberId=${friend.memberId})}" class="btn btn-primary btn-sm mb-1">See Profile</a>
+
+                            <!-- Delete Friendship Form -->
+                            <form th:action="@{/mvc/remove-friendship-invitation(friendshipId=${friend.friendshipId})}"
+                                  method="post">
+
+                                <button type="submit" class="btn btn-danger btn-sm">Remove Friendship</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</div>
+</body>
+</html>

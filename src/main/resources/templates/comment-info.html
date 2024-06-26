@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+<div class="container">
+    <h3>Comment Info</h3>
+    <hr>
+    <div>
+        <h2>Comment Info</h2>
+        <label>Username:</label>
+        <p th:text="${comment.member.user.username}"></p>
+        <label>Content:</label>
+        <p th:text="${comment.content}"></p>
+        <label>Post id:</label>
+        <p th:text="${comment.post.id}"></p>
+        <label>Comment created at:</label>
+        <p th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm:ss' )}"></p>
+<!--        <label>Likes:</label>-->
+<!--        <p th:text="${comment.likes.size()}"></p>-->
+        <br>
+        <a th:href="@{/mvc/comments}">Go to Comments</a>
+        <form th:action="@{/mvc/like-comment}" method="post">
+            <input type="hidden" name="commentId" th:value="${comment.id}"/>
+            <button type="submit" class="btn btn-primary">Like</button>
+        </form>
+        <form th:action="@{/mvc/unlike-comment}" method="post">
+            <input type="hidden" name="commentId" th:value="${comment.id}"/>
+            <button type="submit" class="btn btn-secondary">Unlike</button>
+        </form>
+
+<!--        UPDATE-->
+
+                  <a th:href="@{/mvc/comment-form-update(commentId=${comment.id})}" class="btn btn-info btn-sm">Update</a>
+
+<!--        <                  DELETE-->
+
+          <a th:href="@{/mvc/comment-delete(commentId=${comment.id})}" class="btn btn-danger btn-sm">Delete</a>
+
+
+    </div>
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h1 class="card-title">Please contact our Member Service</h1>
+                    <p class="card-text">You are blocked</p>
+                    <a th:href="@{/logout}" class="btn btn-primary">Login Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+<div class="container">
+    <h3>Comment Form</h3>
+    <hr>
+    <form th:action="@{${comment.id} == null ? '/mvc/comment-form/create' : '/mvc/comment-form/update'}"
+          th:object="${comment}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" name="postId" th:value="${postId}">
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" th:field="*{content}" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary"
+                th:text="*{id} == null ? 'Create Comment' : 'Update Comment'"></button>
+    </form>
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</div>
+</body>
+</html>

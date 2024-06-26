@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ===== BOX ICONS ===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" th:href="@{/styles.css}">
+
+    <title th:text="${pageTitle}">A3M</title>
+    <link rel="icon" th:href="@{/a3m.png}" type="image/x-icon">
+</head>
+<body id="body-pd">
+<header class="header" id="header">
+    <div class="header__toggle">
+        <i class='bx bx-menu' id="header-toggle"></i>
+    </div>
+
+    <div class="header__img">
+        <img th:src="@{/a3m.png}" alt="A3M Logo">
+    </div>
+</header>
+
+<div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+        <div>
+            <a href="#" class="nav__logo">
+                <img th:src="@{/a3m.png}" alt="A3M Logo" width="30px">
+                <span class="nav__logo-name">Mahmoud Najmeh</span>
+            </a>
+
+            <div class="nav__list">
+                <a href="#" class="nav__link active">
+                    <i class='bx bx-grid-alt nav__icon' ></i>
+                    <span class="nav__name">Home</span>
+                </a>
+
+                <a href="#" class="nav__link">
+                    <i class='bx bx-user nav__icon' ></i>
+                    <span class="nav__name">Friends</span>
+                </a>
+
+                <a href="#" class="nav__link">
+                    <i class='bx bx-message-square-detail nav__icon' ></i>
+                    <span class="nav__name">Messages</span>
+                </a>
+
+                <a href="#" class="nav__link">
+                    <i class='bx bx-edit nav__icon'></i>
+                    <span class="nav__name">Post</span>
+                </a>
+
+                <a href="#" class="nav__link">
+                    <i class='bx bx-film nav__icon'></i>
+                    <span class="nav__name">Reels</span>
+                </a>
+
+                <a href="#" class="nav__link">
+                    <i class='bx bx-image nav__icon'></i>
+                    <span class="nav__name">Story</span>
+                </a>
+            </div>
+        </div>
+
+        <a href="#" class="nav__link">
+            <i class='bx bx-log-out nav__icon' ></i>
+            <span class="nav__name">Log Out</span>
+        </a>
+    </nav>
+</div>
+
+<h1>Home</h1>
+<!--===== MAIN JS =====-->
+<script th:src="@{/main.js}"></script>
+</body>
+</html>

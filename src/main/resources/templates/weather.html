@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<body>
+<!-- Header -->
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+
+<!-- Navbar -->
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+<div class="container">
+
+    <h2>Weather</h2>
+    <form th:action="@{/weather}" method="get">
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" class="form-control" id="city" name="city" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div th:if="${weather}">
+        <h2>Weather in <span th:text="${weather.name}"></span></h2>
+        <p>Temperature: <span th:text="${weather.main.temp}"></span> °C</p>
+        <p>Humidity: <span th:text="${weather.main.humidity}"></span>%</p>
+        <p>Condition: <span th:text="${weather.weather[0].description}"></span></p>
+    </div>
+    <!-- Footer -->
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</div>
+</body>
+</html>

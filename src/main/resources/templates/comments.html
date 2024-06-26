@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+<div class="container">
+
+    <h3>Comments List</h3>
+    <hr>
+
+    <table class="table table-light table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Content</th>
+<!--            <th>Likes</th>-->
+            <th>Post id</th>
+            <th>Created at</th>
+
+            <th>Details</th>
+
+            <!--            <th>Update</th>-->
+
+            <!--            <th>Delete</th>-->
+
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="comment : ${comments}">
+            <td th:text="${comment.member.user.username}"/>
+            <td th:text="${comment.content}"/>
+<!--            <td th:text="${comment.likes}"/>-->
+            <td th:text="${comment.post.id}"/>
+            <td th:text="${comment.createdAt}"/>
+
+
+
+            <!--            Details-->
+            <td>
+                <a th:href="@{/mvc/comments/(commentId=${comment.id})}" class="btn btn-info btn-sm">Details</a>
+            </td>
+
+            <!--&lt;!&ndash;                            UPDATE&ndash;&gt;-->
+            <!--            <td>-->
+            <!--                <a th:href="@{/mvc/post-form-update(postId=${post.id})}" class="btn btn-info btn-sm">Update</a>-->
+            <!--            </td>-->
+            <!--&lt;!&ndash;                        DELETE&ndash;&gt;-->
+            <!--            <td>-->
+            <!--                <a th:href="@{/mvc/post-delete(postId=${post.id})}" class="btn btn-danger btn-sm">Delete</a>-->
+            <!--            </td>-->
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</div>
+</body>
+</html>

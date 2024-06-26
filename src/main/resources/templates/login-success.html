@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+<div class="container">
+    <div th:if="${error}" class="alert alert-danger"><p th:text="${error}"></p>
+    <div th:align="center">
+
+        <div class="row">
+            <div class="col">
+                <h2>Welcome, <span th:text="${#authentication.principal.username}"></span>.</h2>
+            <h5>You are logged in now.</h5>
+
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+</div>
+</body>
+</html>
