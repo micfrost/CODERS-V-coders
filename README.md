@@ -39,11 +39,11 @@ This application was developed as a final project during a one year Java Course 
 # CHECKT IT OUT - I MEAN THE APP - NOW!
 Register your account, create a post, find a friend, and comment on their post. 
 
-Use this link [CODERS SOCIAL MEDIA APP](http://coder-025.eu-central-1.elasticbeanstalk.com/login-form) -
+Use this link [CODERS SOCIAL MEDIA APP](http://coders.micfro.com) -
 
 Scan the QR code below to access the app on your mobile device.
 
-![QRCodeCoders](src/main/resources/img/QRCodeCoders.png)
+![qr](src/main/resources/img/qr.png)
 
 
 # Features
