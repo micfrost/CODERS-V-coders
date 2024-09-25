@@ -26,11 +26,11 @@ This application was developed as a final project during a one year Java Course 
 |---|---|---|---|
 
 
-- Aleksandra Frej https://github.com/alexef360,
+- Michal Frost    https://github.com/micfrost, 
 
 - Maria Ibañez    https://github.com/MariaIRubio,
 
-- Michal Frost    https://github.com/micfrost,
+- Aleksandra Frej https://github.com/alexef360,
 
 - Mahmoud Najmeh  https://github.com/MN10101
 
