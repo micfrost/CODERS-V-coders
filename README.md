@@ -44,8 +44,8 @@ Scan the QR code below to access the app on your mobile device.
 
 # Technologies
 
-- Java
-- Spring Boot
+- Java21
+- Spring Boot 3
 - Spring Security
 - Thymeleaf
 - Hibernate (JPA)
