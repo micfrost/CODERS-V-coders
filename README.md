@@ -16,24 +16,6 @@ This **MVC** **app** showcases the use of various technologies such as:
 - The final touch brings deployment the app on **AWS** using **Elastic** **Beanstalk** service.
 
 
-# Authors
-
-This application was developed as a final project during a one year Java Course in 2024 by 
-- [DCI - Digital Career Institute ](https://digitalcareerinstitute.org/).
-
-
-| <img src="https://avatars.githubusercontent.com/u/116974794?v=4" width="200px" style="border-radius: 50%;">   | <img src="https://avatars.githubusercontent.com/u/137775399?v=4" width="200px" style="border-radius: 50%;">  | <img src="https://avatars.githubusercontent.com/u/137774818?v=4" width="200px" style="border-radius: 50%;">  |  <img src="https://avatars.githubusercontent.com/u/78208459?u=c3f9c7d6b49fc9726c5ea8bce260656bcb9654b3&v=4" width="200px" style="border-radius: 50%;"> |
-|---|---|---|---|
-
-
-- Michal Frost    https://github.com/micfrost, 
-
-- Maria Ibañez    https://github.com/MariaIRubio,
-
-- Aleksandra Frej https://github.com/alexef360,
-
-- Mahmoud Najmeh  https://github.com/MN10101
-
 
 
 # CHECKT IT OUT - I MEAN THE APP - NOW!
@@ -318,6 +300,11 @@ Visual representation of the Entity-Relationship for the database schema.
    - View all posts, search by username, or delete posts.
    - View all comments, search by username, or delete comments.
 3. Create initial records or delete all records if needed.
+
+## App
+
+This application was developed as a final project during a one year Java Course in 2024 by 
+- [DCI - Digital Career Institute ](https://digitalcareerinstitute.org/).
 
 
 
