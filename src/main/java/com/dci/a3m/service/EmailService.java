@@ -21,8 +21,8 @@ public class EmailService {
     private final MemberService memberService;
     private final AdminService adminService;
 
-    private final String fromAddress = "coders-a3m@mailfence.com";
-    private final String header = "[CODERS] by A3M - Social Network.\n\nHey CODER! \n\n";
+    private final String fromAddress = "coders-email-notification@coders.awsapps.com";
+    private final String header = "[CODERS] by Michal Frost - Networking App.\n\nHey CODER! \n\n";
 
     public EmailService(JavaMailSender mailSender, TokenService tokenService, UserService userService, MemberService memberService, AdminService adminService) {
         this.mailSender = mailSender;
