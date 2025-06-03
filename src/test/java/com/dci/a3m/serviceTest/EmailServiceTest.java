@@ -54,7 +54,7 @@ class EmailServiceTest {
         verify(mailSender, times(1)).send(messageCaptor.capture());
         SimpleMailMessage sentMessage = messageCaptor.getValue();
 
-        assertEquals("coders-a3m@mailfence.com", sentMessage.getFrom());
+        assertEquals("coders-email-notification@coders.awsapps.com", sentMessage.getFrom());
         assertEquals(to, sentMessage.getTo()[0]);
         assertEquals(subject, sentMessage.getSubject());
         assertEquals(text, sentMessage.getText());
@@ -83,7 +83,7 @@ class EmailServiceTest {
         verify(mailSender, times(1)).send(messageCaptor.capture());
         SimpleMailMessage sentMessage = messageCaptor.getValue();
 
-        assertEquals("coders-a3m@mailfence.com", sentMessage.getFrom());
+        assertEquals("coders-email-notification@coders.awsapps.com", sentMessage.getFrom());
         assertEquals("ThomasLake@example.com", sentMessage.getTo()[0]);
         assertEquals("Password Reset Request", sentMessage.getSubject());
         assertEquals("To reset your password, please click the link below:\n" +
@@ -113,7 +113,7 @@ class EmailServiceTest {
         verify(mailSender, times(1)).send(messageCaptor.capture());
         SimpleMailMessage sentMessage = messageCaptor.getValue();
 
-        assertEquals("coders-a3m@mailfence.com", sentMessage.getFrom());
+        assertEquals("coders-email-notification@coders.awsapps.com", sentMessage.getFrom());
         assertEquals("ThomasLake@example.com", sentMessage.getTo()[0]);
         assertEquals("Password Reset Request", sentMessage.getSubject());
         assertEquals("To reset your password, please click the link below:\n" +
